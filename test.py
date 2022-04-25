@@ -45,11 +45,25 @@ def wolfe_schlegel_test():
     initial_points = jnp.vstack([initial_points_1, initial_points_2])
 
 
-    paths = find_geodesic(wolfe_schlegel, initial_points, minima_1, minima_3, 60000, 0.00001, 100)
+    paths = find_geodesic(
+        function=wolfe_schlegel,
+        initial_points=initial_points,
+        start=minima_1,
+        end=minima_3,
+        num_steps=60000,
+        step_factor=0.00001,
+        distance_factor=100)
 
-    contour_2d(wolfe_schlegel, -2.0, 2.0, -2.0 , 2.0,
-               levels=np.arange(-100,100,5), paths=paths, title="wolfe schlegel",
-               contour_file = test_dir + '/contour_plot.gif'
+    contour_2d(
+        function=wolfe_schlegel,
+        x_min=-2.0,
+        x_max=2.0,
+        y_min=-2.0,
+        y_max=2.0,
+        levels=np.arange(-100,100,5),
+        paths=paths,
+        title="wolfe schlegel",
+        contour_file = test_dir + '/contour_plot.gif'
                )
 
 
@@ -77,11 +91,24 @@ def muller_brown_test():
 
     initial_points = compute_initial_points(minima_1, minima_2, 30)
 
-    paths=find_geodesic(muller_brown, initial_points, minima_1, minima_2, 20000, 0.000001, 100)
+    paths=find_geodesic(
+        function=muller_brown,
+        initial_points=initial_points,
+        start=minima_1,
+        end=minima_2,
+        num_steps=20000,
+        step_factor=0.000001,
+        distance_factor=100)
 
-    contour_2d(muller_brown, -1.7, 1.3, -0.5 , 2.2,
-               levels=np.arange(-200,200,10), paths=paths, title="muller brown",
-               contour_file = test_dir + '/contour_plot.gif')
+    contour_2d(
+        function=muller_brown,
+        x_min=-1.7,
+        x_max=1.3,
+        y_min=-0.5,
+        y_max=2.2,
+        levels=np.arange(-200,200,10),
+        paths=paths, title="muller brown",
+        contour_file = test_dir + '/contour_plot.gif')
 
 
 wolfe_schlegel_test()
