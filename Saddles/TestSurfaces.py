@@ -38,9 +38,9 @@ def muller_brown(point):
 
 
 @partial(jax.jit, static_argnums=[0,1,2,3,4])
-def contour_vals(function, x_min, x_max, y_min, y_max):
-    x_vals = jnp.arange(x_min, x_max, 0.01)
-    y_vals = jnp.arange(y_min, y_max, 0.01)
+def contour_vals(function, x_min, x_max, y_min, y_max, step_size=0.01):
+    x_vals = jnp.arange(x_min, x_max, step_size)
+    y_vals = jnp.arange(y_min, y_max, step_size)
     l,r = jnp.meshgrid(x_vals, y_vals)
     args = jnp.stack([l,r],axis=2)
     return x_vals, y_vals, jnp.apply_along_axis(function, 2, args)
