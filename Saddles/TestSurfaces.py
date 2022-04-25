@@ -59,15 +59,16 @@ def contour_2d(
 
     x_vals, y_vals, z_vals = contour_vals(function, x_min, x_max, y_min, y_max)
 
-    ims = []
     fig, ax = plt.subplots()
     ax.set_title(title)
     ax.contour(x_vals, y_vals, z_vals, levels=levels)
+    plot_artist = ax.plot([],[],color='red', linestyle='none', marker='o')[0]
 
-    for path in paths:
 
-        scatter = ax.scatter(path[:,0], path[:,1],color=['red'])
-        ims.append([scatter])
+    def animation_function(path):
+        plot_artist.set_data(path[:,0], path[:,1])
+        return plot_artist
 
-    ani = animation.ArtistAnimation(fig, ims)
+
+    ani = animation.FuncAnimation(fig, animation_function,frames=paths)
     ani.save(contour_file)

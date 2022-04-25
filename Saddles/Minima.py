@@ -49,7 +49,7 @@ def find_minima(
     print("\n\n\n")
     return point
 
-### finding geodesics ###
+### finding critical_path ###
 
 @partial(jax.jit, static_argnums=[0])
 def action(function, left_point, right_point, distance_factor):
@@ -81,7 +81,7 @@ def lagrangian(
 
 
 @partial(jax.jit, static_argnums=[0])
-def update_geodesic(function, points, start, end, step_factor, distance_factor):
+def update_critical_path(function, points, start, end, step_factor, distance_factor):
 
     new_points = points -  step_factor * jax.grad(lagrangian, argnums=1)(
         function,
@@ -94,7 +94,7 @@ def update_geodesic(function, points, start, end, step_factor, distance_factor):
     return new_points
 
 
-def find_geodesic(
+def find_critical_path(
         function,
         initial_points,
         start,
@@ -105,13 +105,13 @@ def find_geodesic(
         log_frequency=1000
 ):
 
-    print("computing geodesic...")
+    print("computing critical_path...")
     result = []
     points = initial_points
     result.append(points)
 
     for step in range(num_steps):
-        points = update_geodesic(function, points, start, end, step_factor, distance_factor)
+        points = update_critical_path(function, points, start, end, step_factor, distance_factor)
         if step % log_frequency == 0:
             result.append(points)
             training_logger(step, lagrangian(function, points, start, end, distance_factor))

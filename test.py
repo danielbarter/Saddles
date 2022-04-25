@@ -45,7 +45,7 @@ def wolfe_schlegel_test():
     initial_points = jnp.vstack([initial_points_1, initial_points_2])
 
 
-    paths = find_geodesic(
+    paths = find_critical_path(
         function=wolfe_schlegel,
         initial_points=initial_points,
         start=minima_1,
@@ -91,7 +91,7 @@ def muller_brown_test():
 
     initial_points = compute_initial_points(minima_1, minima_2, 30)
 
-    paths=find_geodesic(
+    paths=find_critical_path(
         function=muller_brown,
         initial_points=initial_points,
         start=minima_1,
