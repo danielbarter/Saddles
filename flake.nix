@@ -10,6 +10,7 @@
       with import nixpkgs { system = "x86_64-linux"; };
       mkShell {
         buildInputs = with pkgs; [
+          ffmpeg
           python3
           python3Packages.jax
           (python3Packages.jaxlib.override { cudaSupport = true; })
@@ -32,6 +33,7 @@
       with import nixpkgs { system = "x86_64-linux"; };
       mkShell {
         buildInputs = with pkgs; [
+          ffmpeg
           python3
           python3Packages.jax
           (python3Packages.jaxlib.override { cudaSupport = false; })
