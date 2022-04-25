@@ -17,16 +17,26 @@ subprocess.run(['mkdir', muller_brown_test_dir ])
 
 
 def wolfe_schlegel_test():
+
     test_dir = wolfe_schlegel_test_dir
-    minima_1 = find_minima(wolfe_schlegel, jnp.array([-1.5, 1.5]),
-                           50000, 0.0001)
 
-    minima_2 = find_minima(wolfe_schlegel, jnp.array([-1, -1.5]),
-                           50000, 0.0001)
+    minima_1 = find_minima(
+        function=wolfe_schlegel,
+        initial_point=jnp.array([-1.5, 1.5]),
+        num_steps=50000,
+        step_factor=0.0001)
 
+    minima_2 = find_minima(
+        function=wolfe_schlegel,
+        initial_point=jnp.array([-1, -1.5]),
+        num_steps=50000,
+        step_factor=0.0001)
 
-    minima_3 = find_minima(wolfe_schlegel, jnp.array([1.0, -1.5]),
-                           50000, 0.0001)
+    minima_3 = find_minima(
+        function=wolfe_schlegel,
+        initial_point=jnp.array([1.0, -1.5]),
+        num_steps=50000,
+        step_factor=0.0001)
 
     special_point = jnp.array([0.1, 0.1])
 
@@ -43,15 +53,27 @@ def wolfe_schlegel_test():
                )
 
 
-
 def muller_brown_test():
+
     test_dir = muller_brown_test_dir
-    minima_1 = find_minima(muller_brown, jnp.array([-0.7, 1.5]),
-                           50000, 0.0001)
-    minima_2 = find_minima(muller_brown, jnp.array([0.0, 0.5]),
-                           50000, 0.0001)
-    minima_3 = find_minima(muller_brown, jnp.array([0.5, 0.0]),
-                           50000, 0.0001)
+
+    minima_1 = find_minima(
+        function=muller_brown,
+        initial_point=jnp.array([-0.7, 1.5]),
+        num_steps=50000,
+        step_factor=0.0001)
+
+    minima_2 = find_minima(
+        function=muller_brown,
+        initial_point=jnp.array([0.0, 0.5]),
+        num_steps=50000,
+        step_factor=0.0001)
+
+    minima_3 = find_minima(
+        function=muller_brown,
+        initial_point=jnp.array([0.5, 0.0]),
+        num_steps=50000,
+        step_factor=0.0001)
 
     initial_points = compute_initial_points(minima_1, minima_2, 30)
 
