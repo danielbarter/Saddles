@@ -107,7 +107,8 @@ def muller_brown_test():
         y_min=-0.5,
         y_max=2.2,
         levels=np.arange(-200,200,10),
-        paths=paths, title="muller brown",
+        paths=paths,
+        title="muller brown",
         contour_file = test_dir + '/contour_plot.gif')
 
 
