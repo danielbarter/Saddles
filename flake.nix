@@ -36,7 +36,7 @@
           ffmpeg
           python3
           python3Packages.jax
-          (python3Packages.jaxlib.override { cudaSupport = false; })
+          python3Packages.jaxlib
           python3Packages.matplotlib
         ];
       };

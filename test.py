@@ -23,19 +23,19 @@ def wolfe_schlegel_test():
     minima_1 = find_minima(
         function=wolfe_schlegel,
         initial_point=jnp.array([-1.5, 1.5]),
-        num_steps=50000,
+        num_steps=10000,
         step_factor=0.0001)
 
     minima_2 = find_minima(
         function=wolfe_schlegel,
         initial_point=jnp.array([-1, -1.5]),
-        num_steps=50000,
+        num_steps=10000,
         step_factor=0.0001)
 
     minima_3 = find_minima(
         function=wolfe_schlegel,
         initial_point=jnp.array([1.0, -1.5]),
-        num_steps=50000,
+        num_steps=10000,
         step_factor=0.0001)
 
     special_point = jnp.array([0.1, 0.1])
@@ -74,19 +74,19 @@ def muller_brown_test():
     minima_1 = find_minima(
         function=muller_brown,
         initial_point=jnp.array([-0.7, 1.5]),
-        num_steps=50000,
+        num_steps=10000,
         step_factor=0.0001)
 
     minima_2 = find_minima(
         function=muller_brown,
         initial_point=jnp.array([0.0, 0.5]),
-        num_steps=50000,
+        num_steps=10000,
         step_factor=0.0001)
 
     minima_3 = find_minima(
         function=muller_brown,
         initial_point=jnp.array([0.5, 0.0]),
-        num_steps=50000,
+        num_steps=10000,
         step_factor=0.0001)
 
     initial_points = compute_initial_points(minima_1, minima_2, 30)

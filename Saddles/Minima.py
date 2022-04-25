@@ -7,6 +7,13 @@ from functools import partial
 
 ### finding minima ###
 
+
+def training_logger(step,val):
+    step_string = ("step: " + str(step)).ljust(15)
+    val_string = "val: " + str(val)
+    print(step_string, val_string)
+
+
 @partial(jax.jit, static_argnums=[0])
 def update_minima(function, point, step_factor):
     """
@@ -22,17 +29,24 @@ def find_minima(
         function,
         initial_point,
         num_steps,
-        step_factor
+        step_factor,
+        log_frequency=1000
 ):
     """
     loop for finding minima
     """
 
+    print("computing minima...")
+
     point = initial_point
 
     for step in range(num_steps):
         point = update_minima(function, point, step_factor)
+        if step % log_frequency == 0:
+            training_logger(step, function(point))
 
+
+    print("\n\n\n")
     return point
 
 ### finding geodesics ###
@@ -88,20 +102,23 @@ def find_geodesic(
         num_steps,
         step_factor,
         distance_factor,
-        path_save_frequency=1000
+        log_frequency=1000
 ):
 
+    print("computing geodesic...")
     result = []
     points = initial_points
     result.append(points)
 
     for step in range(num_steps):
         points = update_geodesic(function, points, start, end, step_factor, distance_factor)
-        if step % path_save_frequency == 0:
+        if step % log_frequency == 0:
             result.append(points)
-            print("step: ", step)
+            training_logger(step, lagrangian(function, points, start, end, distance_factor))
 
     result.append(points)
+
+    print("\n\n\n")
     return result
 
 
@@ -109,5 +126,3 @@ def compute_initial_points(start, end, number_of_points):
     ts = np.linspace(0.0, 1.0, number_of_points+1)[1:]
     points = [ start * ( 1 - t ) + end * t for t in ts ]
     return jnp.stack(points)
-
-
