@@ -109,7 +109,7 @@ def muller_brown_test():
         levels=np.arange(-200,200,10),
         paths=paths,
         title="muller brown",
-        contour_file = test_dir + '/contour_plot.gif')
+        contour_file = test_dir + '/contour_plot')
 
 
 wolfe_schlegel_test()
