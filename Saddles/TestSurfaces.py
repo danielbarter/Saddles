@@ -62,6 +62,7 @@ def contour_2d(
     fig, ax = plt.subplots()
     ax.set_title(title)
     ax.contour(x_vals, y_vals, z_vals, levels=levels)
+    fig.savefig(contour_file + '.png')
     plot_artist = ax.plot([],[],color='red', linestyle='none', marker='o')[0]
 
 
@@ -71,4 +72,4 @@ def contour_2d(
 
 
     ani = animation.FuncAnimation(fig, animation_function,frames=paths)
-    ani.save(contour_file)
+    ani.save(contour_file + '.gif')

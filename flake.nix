@@ -5,7 +5,7 @@
 
   outputs = { self, nixpkgs }: {
 
-
+    # nix develop .#gpu
     devShells.x86_64-linux.gpu =
       with import nixpkgs { system = "x86_64-linux"; };
       mkShell {
@@ -28,7 +28,7 @@
         ];
       };
 
-
+    # nix develop .#cpu
     devShells.x86_64-linux.cpu =
       with import nixpkgs { system = "x86_64-linux"; };
       mkShell {

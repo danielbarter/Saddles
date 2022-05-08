@@ -63,7 +63,7 @@ def wolfe_schlegel_test():
         levels=np.arange(-100,100,5),
         paths=paths,
         title="wolfe schlegel",
-        contour_file = test_dir + '/contour_plot.gif'
+        contour_file = test_dir + '/contour_plot'
                )
 
 
